@@ -6,12 +6,13 @@ let interval=null;
 let startbtn=document.getElementById("startbtn");
 let stopbtn=document.getElementById("stopbtn");
 let resetbtn=document.getElementById("resetbtn");
+stopbtn.disabled=true;
+resetbtn.disabled=true;
 function start(){
     if(!interval){
         interval=setInterval(() => {
             sec++;
             time=`${hour}:${min}:${sec}`;
-            startbtn.disabled=true;
             if(sec>=60)
             {
                 min++;
@@ -25,6 +26,9 @@ function start(){
             let timerElem=document.getElementById("timer");
             timerElem.innerHTML=time;
         }, 1000);
+        startbtn.disabled=true;
+        stopbtn.disabled=false;
+        resetbtn.disabled=false;
     }
 }
 
@@ -32,6 +36,8 @@ function stop(){
     clearInterval(interval);
     interval=null;
     startbtn.disabled=false;
+    stopbtn.disabled=true;
+    resetbtn.disabled=false;
 
 }
 function reset(){
@@ -44,5 +50,7 @@ function reset(){
     let timerElem = document.getElementById("timer");
     timerElem.innerHTML = time;
     startbtn.disabled=false;
+    stopbtn.disabled=true;
+    resetbtn.disabled=true;
 }
 
